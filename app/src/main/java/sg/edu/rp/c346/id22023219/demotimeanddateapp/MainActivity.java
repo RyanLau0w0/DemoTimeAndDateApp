@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     TimePicker tp;
     Button btnDisplayDate;
     Button btnDisplayTime;
+    Button btnReset;
     TextView tvDisplay;
 
     @Override
@@ -27,13 +28,14 @@ public class MainActivity extends AppCompatActivity {
         tp = findViewById(R.id.timePicker);
         btnDisplayDate = findViewById(R.id.buttonDisplayDate);
         btnDisplayTime = findViewById(R.id.buttonDisplayTime);
+        btnReset = findViewById(R.id.buttonReset);
         tvDisplay = findViewById(R.id.textViewDisplay);
 
         //
         btnDisplayTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int Hour = tp.getHour();
+                int Hour = tp.getHour() ;
                 String Mins = "";
                 if (tp.getMinute() < 10){
                     Mins = "0" + tp.getMinute();
@@ -50,11 +52,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             int Year = dp.getYear();
-            int Month = dp.getMonth();
+            int Month = dp.getMonth() + 1;
             int Day = dp.getDayOfMonth();
             String stringResponse = "Date is " + Day + "/" + Month + "/" + Year;
             tvDisplay.setText(stringResponse);
 
+            }
+        });
+        //Here is the reset button program
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dp.updateDate(2023,00,01);
+                tp.setHour(0);
+                tp.setMinute(0);
             }
         });
 
